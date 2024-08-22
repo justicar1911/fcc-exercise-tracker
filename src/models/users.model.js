@@ -7,10 +7,12 @@ async function addNewUser(user) {
 
 async function getUser(id) {
     try {
-        return await usersDatabase.findById({ _id: id }, { '__v': 0 })
+        return await usersDatabase.findById({ _id: id })
     } catch {
         return null
     }
+
+
 }
 
 async function getAllUser() {

@@ -5,7 +5,10 @@ const {
 } = require('./users.controller')
 
 const {
+    handleUserID,
+    handleDate,
     httpAddNewExercise,
+
 } = require('../exercises/exercises.controller')
 
 const usersRouter = express.Router();
@@ -13,6 +16,6 @@ const usersRouter = express.Router();
 usersRouter.post('/', httpAddNewUser)
 usersRouter.get('/', httpGetAllUsers)
 
-usersRouter.post('/:_id/exercises', httpAddNewExercise)
+usersRouter.post('/:_id/exercises', [handleUserID, handleDate], httpAddNewExercise)
 
 module.exports = usersRouter;
