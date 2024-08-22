@@ -5,11 +5,20 @@ async function addNewUser(user) {
     return await usersDatabase.findById(result._id).select('-__v')
 }
 
+async function getUser(id) {
+    try {
+        return await usersDatabase.findById({ _id: id }, { '__v': 0 })
+    } catch {
+        return null
+    }
+}
+
 async function getAllUser() {
     return await usersDatabase.find({}, { '__v': 0 })
 }
 
 module.exports = {
     addNewUser,
+    getUser,
     getAllUser
 }

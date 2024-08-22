@@ -16,5 +16,5 @@ async function httpGetAllUsers(req, res) {
 
 module.exports = {
     httpAddNewUser,
-    httpGetAllUsers
+    httpGetAllUsers,
 }
