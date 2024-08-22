@@ -1,14 +1,6 @@
-const { getUser } = require('../../models/users.model')
+const mongoose = require('mongoose')
+const { findUser } = require('../../models/users.model')
 const { scheduleNewExercise } = require('../../models/exercises.model');
-
-async function handleUserID(req, res, next) {
-    const { _id } = req.params;
-    req.userID = await getUser(_id)
-    if (!req.userID) {
-        return res.status(404).json({ error: "User Not Found" })
-    }
-    next()
-}
 
 function handleDate(req, res, next) {
     const { date } = req.body;
@@ -17,13 +9,23 @@ function handleDate(req, res, next) {
 }
 
 async function httpAddNewExercise(req, res) {
-    const { "_id": id, description, duration, date } = req.body
-    return res.status(200).json(req.date)
+    const { _id: userId } = req.params
+    const { _id, username } = await findUser({ _id: userId })
+
+    const { description, duration } = req.body
+
+    const data = {
+        username,
+        description,
+        duration: Number(duration),
+        date: req.date,
+        _id
+    }
+    return res.status(201).json(data)
 }
 
 
 module.exports = {
-    handleUserID,
     handleDate,
     httpAddNewExercise
 }

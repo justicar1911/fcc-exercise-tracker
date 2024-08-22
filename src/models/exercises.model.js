@@ -1,7 +1,7 @@
 const exerciseDatabase = require('./exercises.mongo')
 
-async function scheduleNewExercise(exercise) {
-    await exerciseDatabase.create(exercise)
+async function scheduleNewExercise({ description, duration }, req) {
+
 }
 
 

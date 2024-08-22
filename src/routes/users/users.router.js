@@ -5,7 +5,6 @@ const {
 } = require('./users.controller')
 
 const {
-    handleUserID,
     handleDate,
     httpAddNewExercise,
 
@@ -16,6 +15,6 @@ const usersRouter = express.Router();
 usersRouter.post('/', httpAddNewUser)
 usersRouter.get('/', httpGetAllUsers)
 
-usersRouter.post('/:_id/exercises', [handleUserID, handleDate], httpAddNewExercise)
+usersRouter.post('/:_id/exercises', handleDate, httpAddNewExercise)
 
 module.exports = usersRouter;

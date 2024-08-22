@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const usersDatabase = require('./users.mongo')
 
 async function addNewUser(user) {
@@ -5,14 +6,8 @@ async function addNewUser(user) {
     return await usersDatabase.findById(result._id).select('-__v')
 }
 
-async function getUser(id) {
-    try {
-        return await usersDatabase.findById({ _id: id })
-    } catch {
-        return null
-    }
-
-
+async function findUser(filter) {
+    return await usersDatabase.findOne(filter)
 }
 
 async function getAllUser() {
@@ -21,6 +16,6 @@ async function getAllUser() {
 
 module.exports = {
     addNewUser,
-    getUser,
+    findUser,
     getAllUser
 }
