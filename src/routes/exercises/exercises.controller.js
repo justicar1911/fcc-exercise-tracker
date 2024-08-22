@@ -19,7 +19,7 @@ async function httpAddNewExercise(req, res) {
         username,
         description,
         duration: Number(duration),
-        date: req.date,
+        date: new Date(req.date).toDateString(),
         _id
     }
     await scheduleNewExercise(exercise)
@@ -30,6 +30,7 @@ async function httpGetAllExercise(req, res) {
     const query = getLogQuery(req.query)
     const { _id: userId } = req.params
     const exercises = await findAllExercises(userId, query)
+
     return res.status(200).json(exercises)
 }
 
